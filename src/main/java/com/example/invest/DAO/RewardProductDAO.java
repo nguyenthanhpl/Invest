@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Entity
 @Data
-public class RewardProduct {
+public class RewardProductDAO {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

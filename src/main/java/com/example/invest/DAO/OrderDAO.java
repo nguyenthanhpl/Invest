@@ -22,5 +22,5 @@ public class OrderDAO {
     private UserDAO userDAO;
 
     @OneToOne(mappedBy = "orderDAO")
-    private RewardProduct rewardProduct;
+    private RewardProductDAO rewardProduct;
 }
