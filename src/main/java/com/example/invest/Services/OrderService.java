@@ -4,8 +4,10 @@ import com.example.invest.DAO.OrderDAO;
 import com.example.invest.DTO.OrderDTO;
 import com.example.invest.Entity.Order;
 
+import java.util.List;
+
 public interface OrderService {
-    public void create(OrderDTO orderDTO);
+    public void createOrder(OrderDTO orderDTO);
 
     public Order findById(Long orderId);
 

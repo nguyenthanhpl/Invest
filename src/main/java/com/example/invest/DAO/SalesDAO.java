@@ -19,4 +19,11 @@ public class SalesDAO {
     private Long orderDAOId;
 
     private Long userDAOId;
+
+    public SalesDAO( Double amount, Long orderDAOId, Long userDAOId) {
+
+        this.amount = amount;
+        this.orderDAOId = orderDAOId;
+        this.userDAOId = userDAOId;
+    }
 }

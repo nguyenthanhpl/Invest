@@ -8,4 +8,11 @@ public class RewardSales {
     private Long orderId;
     private Long userId;
     private Double amount;
+
+    public RewardSales( Long orderId, Long userId, Double amount) {
+
+        this.orderId = orderId;
+        this.userId = userId;
+        this.amount = amount;
+    }
 }
