@@ -4,12 +4,12 @@ import com.example.invest.DAO.OrderDAO;
 import com.example.invest.DTO.OrderDTO;
 import com.example.invest.Entity.Order;
 import com.example.invest.Repository.OrderRepository;
-import com.example.invest.Services.OrderService;
-import com.example.invest.Services.RewardProductService;
-import com.example.invest.Services.SalesService;
-import com.example.invest.Services.UserService;
+import com.example.invest.Services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class OrderServiceImpl implements OrderService {
@@ -25,12 +25,15 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     SalesService salesService;
 
-    public void create(OrderDTO orderDTO) {
-//        User user = new User(orderDTO.getUid());
+    @Autowired
+    RewardSalesService rewardSalesService;
+
+    public void createOrder(OrderDTO orderDTO) {
         Order order = new Order(orderDTO.getAmount(), orderDTO.getDay(), orderDTO.getDayLimit(), orderDTO.getProductType(), orderDTO.getUid());
         OrderDAO orderDAO = orderRepository.save(mapperOrder(order));
-        rewardProductService.create(orderDAO.getId());
-        salesService.create(orderDAO.getId());
+        rewardProductService.create(mapperOrderDAO(orderDAO));
+        salesService.create(mapperOrderDAO(orderDAO));
+        rewardSalesService.rewardSharUser(mapperOrderDAO(orderDAO));
     }
 
     @Override
@@ -49,6 +52,8 @@ public class OrderServiceImpl implements OrderService {
     public Double getAmount(Long orderId) {
         return orderRepository.getAmount(orderId);
     }
+
+
 
     // lấy địa chỉ cha thông qua orderId
 

@@ -12,6 +12,6 @@ public class RewardProductDAO {
     @Column(name = "id")
     private Long id;
     private Double point;
-
+    private Long userDAOId;
     private Long orderDAOId;
 }

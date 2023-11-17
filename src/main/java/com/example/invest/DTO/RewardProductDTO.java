@@ -7,6 +7,6 @@ import lombok.Data;
 public class RewardProductDTO {
     private Long id;
     private Double point;
-
+    private Long userDTOId;
     private Long orderDTOId;
 }

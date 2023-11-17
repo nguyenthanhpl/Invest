@@ -1,7 +1,7 @@
 package com.example.invest.Services;
 
-import com.example.invest.DTO.SalesDTO;
+import com.example.invest.Entity.Order;
 
 public interface SalesService {
-    public void create(Long orderId);
+    public void create(Order order);
 }
