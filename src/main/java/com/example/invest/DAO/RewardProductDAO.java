@@ -13,7 +13,5 @@ public class RewardProductDAO {
     private Long id;
     private Double point;
 
-    @OneToOne
-    @JoinColumn(name = "orderDAO_id",referencedColumnName = "id")
-    private OrderDAO orderDAO;
+    private Long orderDAOId;
 }

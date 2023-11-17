@@ -6,9 +6,12 @@ import java.util.Date;
 @Data
 public class OrderDTO {
 
-    private Double values;
+    private Long id;
+    private Double amount;
     private Date day;
     private Date dayLimit;
     private Long productType;
     private Long uid;
+
+
 }

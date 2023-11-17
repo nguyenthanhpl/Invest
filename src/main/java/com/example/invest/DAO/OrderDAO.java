@@ -12,15 +12,13 @@ public class OrderDAO {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-    private Double value;
+    private Double amount;
     private Date day;
     private Date dayLimit;
     private Long productType;
 
-    @ManyToOne
-    @JoinColumn(name = "userDAO_id")
-    private UserDAO userDAO;
+    private Long userDAOId;
 
-    @OneToOne(mappedBy = "orderDAO")
-    private RewardProductDAO rewardProduct;
+//    public Double getValue() {
+//    }
 }
