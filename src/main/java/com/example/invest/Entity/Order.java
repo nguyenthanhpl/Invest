@@ -8,9 +8,27 @@ import java.util.Date;
 public class Order {
 
     private Long id;
-    private Double values;
+    private Double amount;
     private Date day;
     private Date dayLimit;
     private Long productType;
-    private User user;
+    private final Long userId;
+
+    public Order(Long user) {
+        this.userId = user;
+    }
+
+
+    public Order( Double amount, Date day, Date dayLimit, Long productType,Long user) {
+
+        this.amount = amount;
+        this.day = day;
+        this.dayLimit = dayLimit;
+        this.productType = productType;
+        this.userId = user;
+    }
+
+
+
+
 }
