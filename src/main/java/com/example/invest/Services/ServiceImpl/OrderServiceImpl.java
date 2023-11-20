@@ -71,7 +71,7 @@ public class OrderServiceImpl implements OrderService {
 
     private Order mapperOrderDAO(OrderDAO orderDAO) {
 //        User user = new User(orderDAO.getUserDAO().getId());
-        Order order = new Order(orderDAO.getAmount(), orderDAO.getDay(), orderDAO.getDayLimit(), orderDAO.getProductType(), orderDAO.getUserDAOId());
+        Order order = new Order(orderDAO.getId(),orderDAO.getAmount(), orderDAO.getDay(), orderDAO.getDayLimit(), orderDAO.getProductType(), orderDAO.getUserDAOId());
         return order;
     }
 

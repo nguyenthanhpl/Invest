@@ -37,7 +37,7 @@ public class UserServiceImpl implements UserService {
         List<Long> parents = new ArrayList<>();
         Long userId = order.getUserId();
 //        parents.add(userId);
-        while (getParentAddress(userId).equals(null) == false) {
+        while (getParentAddress(userId) != null) {
             Long idUserParent = getParentAddressID(userId);
             userId = idUserParent;
             parents.add(userId);
@@ -57,7 +57,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public String getParentAddress(Long userId) {
-        return userRepository.getParentAddress(userId);
+        String parentAddress = userRepository.getParentAddress(userId);
+        return parentAddress;
     }
 
     @Override

@@ -30,5 +30,12 @@ public class Order {
 
 
 
-
+    public Order(Long id, Double amount, Date day, Date dayLimit, Long productType, Long userId) {
+        this.id = id;
+        this.amount = amount;
+        this.day = day;
+        this.dayLimit = dayLimit;
+        this.productType = productType;
+        this.userId = userId;
+    }
 }
