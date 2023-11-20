@@ -26,4 +26,8 @@ public class SalesDAO {
         this.orderDAOId = orderDAOId;
         this.userDAOId = userDAOId;
     }
+
+    public SalesDAO() {
+
+    }
 }

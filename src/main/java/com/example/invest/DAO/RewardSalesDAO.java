@@ -25,4 +25,8 @@ public class RewardSalesDAO {
         this.userDAOId = userDAOId;
         this.amount = amount;
     }
+
+    public RewardSalesDAO() {
+
+    }
 }
