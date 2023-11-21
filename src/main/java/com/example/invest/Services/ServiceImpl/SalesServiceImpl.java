@@ -34,8 +34,12 @@ public class SalesServiceImpl implements SalesService {
             Sales sales = new Sales(order.getId(), parent, order.getAmount());
             salesRepository.save(mapperSales(sales));
         }
+    }
 
-
+    @Override
+    public Double getTotalPoint(Long userId) {
+        Double totalPoint = salesRepository.getTotalPoint(userId);
+        return totalPoint;
     }
 
     private SalesDAO mapperSales(Sales sales) {
@@ -44,17 +48,6 @@ public class SalesServiceImpl implements SalesService {
         return salesDAO;
     }
 
-//    private Double countPoint(Long userId){
-//        User user = userService.findById(userId);
-//        Long totalChild = userService.totalChild(user.getParentAddress());
-//        Double totalChildPoint = userService.totalChildPoint(user.getParentAddress());
-//        if(totalChild >=3){
-//            if(totalChildPoint >= 500000 && totalChildPoint <200000){
-//
-//            }
-//        }
-//        return Double.parseDouble("0");
-//    }
 
 
 }

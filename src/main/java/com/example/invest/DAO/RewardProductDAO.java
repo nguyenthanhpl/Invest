@@ -14,4 +14,5 @@ public class RewardProductDAO {
     private Double point;
     private Long userDAOId;
     private Long orderDAOId;
+    private String type;
 }
