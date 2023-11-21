@@ -8,16 +8,24 @@ public class RewardProduct {
     private Double point;
 
     private Long userId;
-    private final Long orderId;
-
+    private  Long orderId;
+    private String type;
     public RewardProduct(Long order) {
         this.orderId = order;
     }
 
-    public RewardProduct( Double point, Long userId, Long order) {
+    public RewardProduct( Double point, Long userId, Long order, String type) {
         this.point = point;
         this.userId = userId;
         this.orderId = order;
+        this.type = type;
+    }
+
+    public RewardProduct( Double point, Long userId, String type) {
+        this.point = point;
+        this.userId = userId;
+//        this.orderId = order;
+        this.type = type;
     }
 
 
