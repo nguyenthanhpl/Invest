@@ -34,13 +34,6 @@ public class RewardProductServiceImpl implements RewardProductService {
     @Override
     public String unDeposit(RewardProductDTO rewardProductDTO) {
         Double balance = rewardProductRepository.checkTotalPoint(rewardProductDTO.getUserDTOId());
-//        if(getTotalPointUnDeposit(rewardProductDTO.getUserDTOId()) != null){
-//            balance = getTotalPointDeposit(rewardProductDTO.getUserDTOId()) - getTotalPointUnDeposit(rewardProductDTO.getUserDTOId());
-//
-//        }
-//        else {
-//            balance = getTotalPointDeposit(rewardProductDTO.getUserDTOId());
-//        }
         if (balance >= rewardProductDTO.getPoint()) {
             RewardProduct rewardProduct = new RewardProduct(rewardProductDTO.getPoint(), rewardProductDTO.getUserDTOId(), "undeposit");
             rewardProductRepository.save(mapperRewardProduct(rewardProduct));
@@ -51,15 +44,15 @@ public class RewardProductServiceImpl implements RewardProductService {
 
 
     //    @Override
-    public Double getTotalPointDeposit(Long userId) {
-        Double totalPoint = rewardProductRepository.getTotalPointDeposit(userId);
-        return totalPoint;
-    }
+//    public Double getTotalPointDeposit(Long userId) {
+//        Double totalPoint = rewardProductRepository.getTotalPointDeposit(userId);
+//        return totalPoint;
+//    }
 
-    public Double getTotalPointUnDeposit(Long userId) {
-        Double totalPoint = rewardProductRepository.getTotalPointUnDeposit(userId);
-        return totalPoint;
-    }
+//    public Double getTotalPointUnDeposit(Long userId) {
+//        Double totalPoint = rewardProductRepository.getTotalPointUnDeposit(userId);
+//        return totalPoint;
+//    }
 
     private RewardProductDAO mapperRewardProduct(RewardProduct rewardProduct) {
         RewardProductDAO rewardProductDAO = new RewardProductDAO();
