@@ -8,11 +8,20 @@ public class RewardSales {
     private Long orderId;
     private Long userId;
     private Double amount;
-
-    public RewardSales( Long orderId, Long userId, Double amount) {
+    private String type;
+    public RewardSales( Long orderId, Long userId, Double amount,String type) {
 
         this.orderId = orderId;
         this.userId = userId;
         this.amount = amount;
+        this.type = type;
+    }
+
+    public RewardSales(  Long userId, Double amount,String type) {
+
+//        this.orderId = orderId;
+        this.userId = userId;
+        this.amount = amount;
+        this.type = type;
     }
 }

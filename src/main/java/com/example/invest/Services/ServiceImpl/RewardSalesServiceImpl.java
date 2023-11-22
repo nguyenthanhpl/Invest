@@ -1,7 +1,10 @@
 package com.example.invest.Services.ServiceImpl;
 
 import com.example.invest.DAO.RewardSalesDAO;
+import com.example.invest.DTO.RewardProductDTO;
+import com.example.invest.DTO.RewardSalesDTO;
 import com.example.invest.Entity.Order;
+import com.example.invest.Entity.RewardProduct;
 import com.example.invest.Entity.RewardSales;
 import com.example.invest.Repository.RewardSalesRepository;
 import com.example.invest.Services.RewardProductService;
@@ -46,7 +49,7 @@ public class RewardSalesServiceImpl implements RewardSalesService {
             Integer totalParents = parents50.size();
             double present = ((0.05 * getAmount) / totalParents);
             for (Long parent : parents50) {
-                RewardSales rewardSale = new RewardSales(order.getId(), parent, present);
+                RewardSales rewardSale = new RewardSales(order.getId(), parent, present,"deposit");
                 rewardSalesRepository.save(mapperRewardSales(rewardSale));
             }
         }
@@ -54,10 +57,21 @@ public class RewardSalesServiceImpl implements RewardSalesService {
 //            Integer totalParents = parents50.size();
             double present = (0.05 * getAmount) / parents200.size();
             for (Long parent : parents200) {
-                RewardSales rewardSale = new RewardSales(order.getId(), parent, present);
+                RewardSales rewardSale = new RewardSales(order.getId(), parent, present,"deposit");
                 rewardSalesRepository.save(mapperRewardSales(rewardSale));
             }
         }
+    }
+
+    @Override
+    public String unDeposit(RewardSalesDTO rewardSalesDTO) {
+        Double balance = rewardSalesRepository.checkTotalPoint(rewardSalesDTO.getUserDTOId());
+        if (balance >= rewardSalesDTO.getAmount()) {
+            RewardSales rewardSales = new RewardSales(rewardSalesDTO.getUserDTOId(), rewardSalesDTO.getAmount(), "undeposit");
+            rewardSalesRepository.save(mapperRewardSales(rewardSales));
+            return "thành Công";
+        }
+        return "thất bại";
     }
 
 //    @Override
@@ -76,7 +90,7 @@ public class RewardSalesServiceImpl implements RewardSalesService {
 
 
     private RewardSalesDAO mapperRewardSales(RewardSales rewardSales) {
-        RewardSalesDAO rewardSalesDAO = new RewardSalesDAO(rewardSales.getOrderId(), rewardSales.getUserId(), rewardSales.getAmount());
+        RewardSalesDAO rewardSalesDAO = new RewardSalesDAO(rewardSales.getOrderId(), rewardSales.getUserId(), rewardSales.getAmount(), rewardSales.getType());
         return rewardSalesDAO;
     }
 }
