@@ -38,4 +38,10 @@ public class Order {
         this.productType = productType;
         this.userId = userId;
     }
+
+    public Order(Long id, Long userId, Double amount){
+        this.id = id;
+        this.userId = userId;
+        this.amount = amount;
+    }
 }
