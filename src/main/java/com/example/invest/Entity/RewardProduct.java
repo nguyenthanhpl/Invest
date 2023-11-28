@@ -8,25 +8,28 @@ public class RewardProduct {
     private Double point;
 
     private Long userId;
-    private  Long orderId;
-    private String type;
+    private  Long productId;
+    private Type type;
     public RewardProduct(Long order) {
-        this.orderId = order;
+        this.productId = order;
     }
 
-    public RewardProduct( Double point, Long userId, Long order, String type) {
+    public RewardProduct( Double point, Long userId, Long productId, Type type) {
         this.point = point;
         this.userId = userId;
-        this.orderId = order;
+        this.productId = productId;
         this.type = type;
     }
 
-    public RewardProduct( Double point, Long userId, String type) {
+    public RewardProduct( Double point, Long userId, Type type) {
         this.point = point;
         this.userId = userId;
 //        this.orderId = order;
         this.type = type;
     }
 
+    public enum Type{
+        Deposit,Withdraw
+    }
 
 }

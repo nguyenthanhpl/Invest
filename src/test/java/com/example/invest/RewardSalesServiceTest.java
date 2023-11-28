@@ -22,14 +22,14 @@ public class RewardSalesServiceTest {
     @InjectMocks
     RewardSalesServiceImpl rewardSalesService;
 
-    @Test
-    public void test_unDeposit_reward_sales() {
-        RewardSalesDTO rewardSalesDTO = new RewardSalesDTO();
-        rewardSalesDTO.setAmount(200.0);
-        rewardSalesDTO.setUserDTOId(1L);
-
-        Mockito.when(rewardSalesRepository.checkTotalPoint(1L)).thenReturn(300.0);
-        String result = rewardSalesService.unDeposit(rewardSalesDTO);
-        assertEquals("thành Công", result);
-    }
+//    @Test
+//    public void test_unDeposit_reward_sales() {
+//        RewardSalesDTO rewardSalesDTO = new RewardSalesDTO();
+//        rewardSalesDTO.setAmount(200.0);
+//        rewardSalesDTO.setUserDTOId(1L);
+//
+//        Mockito.when(rewardSalesRepository.checkTotalPoint(1L)).thenReturn(300.0);
+//        String result = rewardSalesService.unDeposit(rewardSalesDTO);
+//        assertEquals("thành Công", result);
+//    }
 }

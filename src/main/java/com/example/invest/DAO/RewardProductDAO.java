@@ -13,6 +13,10 @@ public class RewardProductDAO {
     private Long id;
     private Double point;
     private Long userDAOId;
-    private Long orderDAOId;
-    private String type;
+    private Long productDAOId;
+    private Type type;
+
+    public enum Type{
+        Deposit,Withdraw
+    }
 }

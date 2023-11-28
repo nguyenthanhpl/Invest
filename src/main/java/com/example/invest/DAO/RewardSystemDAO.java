@@ -6,32 +6,28 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.Data;
 
-import java.util.List;
-
 @Data
 @Entity
-public class RewardSalesDAO {
+public class RewardSystemDAO {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Long orderDAOId;
+    private Double point;
     private Long userDAOId;
-    private Double amount;
     private Type type;
 
-    public RewardSalesDAO( Long orderDAOId, Long userDAOId, Double amount, Type type) {
-        this.orderDAOId = orderDAOId;
+    public RewardSystemDAO(Double point, Long userDAOId, Type type) {
+        this.point = point;
         this.userDAOId = userDAOId;
-        this.amount = amount;
         this.type = type;
     }
 
-    public RewardSalesDAO() {
+    public RewardSystemDAO() {
 
     }
 
-    public enum  Type{
-        Deposit, Withdraw;
+    public enum Type {
+        Deposit, Withdraw
     }
 }

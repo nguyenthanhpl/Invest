@@ -1,16 +1,14 @@
 package com.example.invest.Services.ServiceImpl;
 
 import com.example.invest.DAO.RewardSalesDAO;
+import com.example.invest.DTO.ClaimDTO;
 import com.example.invest.DTO.RewardProductDTO;
 import com.example.invest.DTO.RewardSalesDTO;
 import com.example.invest.Entity.Order;
 import com.example.invest.Entity.RewardProduct;
 import com.example.invest.Entity.RewardSales;
 import com.example.invest.Repository.RewardSalesRepository;
-import com.example.invest.Services.RewardProductService;
-import com.example.invest.Services.RewardSalesService;
-import com.example.invest.Services.SalesService;
-import com.example.invest.Services.UserService;
+import com.example.invest.Services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,9 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class RewardSalesServiceImpl implements RewardSalesService {
-
-
+public class RewardSalesServiceImpl extends RewardServiceAbs {
 
 
     @Autowired
@@ -32,11 +28,12 @@ public class RewardSalesServiceImpl implements RewardSalesService {
     @Autowired
     RewardSalesRepository rewardSalesRepository;
 
-    public void rewardSharUser(Order order) {
+    public String create(Order order) {
         Double getAmount = order.getAmount();
         List<Long> parents = getTotalParentQualified(order);
         List<Long> parents50 = new ArrayList<>();
         List<Long> parents200 = new ArrayList<>();
+        RewardSales.Type type = RewardSales.Type.Deposit;
         for (Long parent : parents) {
             Double totalPointParent = salesService.getTotalPoint(parent);
             if ( totalPointParent >= 50 && totalPointParent < 200) {
@@ -49,25 +46,29 @@ public class RewardSalesServiceImpl implements RewardSalesService {
             Integer totalParents = parents50.size();
             double present = ((0.05 * getAmount) / totalParents);
             for (Long parent : parents50) {
-                RewardSales rewardSale = new RewardSales(order.getId(), parent, present,"deposit");
+                RewardSales rewardSale = new RewardSales(order.getId(), parent, present,type);
                 rewardSalesRepository.save(mapperRewardSales(rewardSale));
             }
+
         }
         if (parents200.size() != 0) {
 //            Integer totalParents = parents50.size();
             double present = (0.05 * getAmount) / parents200.size();
             for (Long parent : parents200) {
-                RewardSales rewardSale = new RewardSales(order.getId(), parent, present,"deposit");
+                RewardSales rewardSale = new RewardSales(order.getId(), parent, present,type);
                 rewardSalesRepository.save(mapperRewardSales(rewardSale));
             }
+
         }
+        return "thanh cong";
     }
 
     @Override
-    public String unDeposit(RewardSalesDTO rewardSalesDTO) {
-        Double balance = rewardSalesRepository.checkTotalPoint(rewardSalesDTO.getUserDTOId());
-        if (balance >= rewardSalesDTO.getAmount()) {
-            RewardSales rewardSales = new RewardSales(rewardSalesDTO.getUserDTOId(), rewardSalesDTO.getAmount(), "undeposit");
+    public String withdraw(ClaimDTO claimDTO) {
+        Double balance = rewardSalesRepository.checkTotalPoint(claimDTO.getUserDTOId());
+        RewardSales.Type type = RewardSales.Type.Withdraw;
+        if (balance.longValue() !=0) {
+            RewardSales rewardSales = new RewardSales(claimDTO.getUserDTOId(), balance, type);
             rewardSalesRepository.save(mapperRewardSales(rewardSales));
             return "thành Công";
         }
@@ -90,7 +91,17 @@ public class RewardSalesServiceImpl implements RewardSalesService {
 
 
     private RewardSalesDAO mapperRewardSales(RewardSales rewardSales) {
-        RewardSalesDAO rewardSalesDAO = new RewardSalesDAO(rewardSales.getOrderId(), rewardSales.getUserId(), rewardSales.getAmount(), rewardSales.getType());
-        return rewardSalesDAO;
+        if(rewardSales.getType().equals(RewardSales.Type.Deposit))
+        {
+            RewardSalesDAO.Type type = RewardSalesDAO.Type.Deposit;
+            RewardSalesDAO rewardSalesDAO = new RewardSalesDAO(rewardSales.getProductId(), rewardSales.getUserId(), rewardSales.getAmount(), type);
+            return rewardSalesDAO;
+        }
+        else{
+            RewardSalesDAO.Type type = RewardSalesDAO.Type.Withdraw;
+            RewardSalesDAO rewardSalesDAO = new RewardSalesDAO(rewardSales.getProductId(), rewardSales.getUserId(), rewardSales.getAmount(), type);
+            return rewardSalesDAO;
+        }
+
     }
 }

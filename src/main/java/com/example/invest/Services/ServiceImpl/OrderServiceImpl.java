@@ -20,20 +20,24 @@ public class OrderServiceImpl implements OrderService {
     UserService userService;
 
     @Autowired
-    RewardProductService rewardProductService;
+    RewardProductServiceImpl rewardProductService;
 
     @Autowired
     SalesService salesService;
 
     @Autowired
-    RewardSalesService rewardSalesService;
+    RewardSalesServiceImpl rewardSalesService;
+//
+    @Autowired
+    RewardSystemImpl rewardService;
 
     public void createOrder(OrderDTO orderDTO) {
         Order order = new Order(orderDTO.getAmount(), orderDTO.getDay(), orderDTO.getDayLimit(), orderDTO.getProductType(), orderDTO.getUid());
         OrderDAO orderDAO = orderRepository.save(mapperOrder(order));
         rewardProductService.create(mapperOrderDAO(orderDAO));
         salesService.create(mapperOrderDAO(orderDAO));
-        rewardSalesService.rewardSharUser(mapperOrderDAO(orderDAO));
+        rewardSalesService.create(mapperOrderDAO(orderDAO));
+        rewardService.create(mapperOrderDAO(orderDAO));
     }
 
     @Override
